@@ -61,7 +61,11 @@ services:
           cpus: "0.6"
           memory: "260MB"
 
+volumes:
+  init.sql:
+
 networks:
   default:
     driver: bridge
     name: rinha2024
+

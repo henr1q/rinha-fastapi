@@ -5,5 +5,5 @@ COPY ./requirements.txt .
 
 COPY . /app
 
-#RUN pip install "psycopg[binary]"
+RUN pip install "psycopg[binary]"
 RUN pip install -r requirements.txt

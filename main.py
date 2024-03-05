@@ -68,7 +68,7 @@ def create_transacao_for_cliente(cliente_id: int, request: schemas.TransacaoRequ
         )
         conn.execute(f"UPDATE clientes SET saldo = {saldo_futuro} WHERE id={cliente_id}")
     
-        response = schemas.TransacaoReponse(limite=result[1], saldo=saldo_futuro)
+        response = schemas.TransacaoResponse(limite=result[1], saldo=saldo_futuro)
         return response
 
 @app.get("/clientes/{cliente_id}/extrato")
