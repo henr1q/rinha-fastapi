@@ -19,8 +19,8 @@ database_user = "admin"
 
 pool = ConnectionPool(
     f"host={database_host} port={database_port} dbname={database_name} user={database_user} password={database_password}",
-    min_size=14,
-    max_size=50,
+    min_size=10,
+    max_size=30,
 )
 pool.wait()
 
@@ -49,11 +49,8 @@ def create_transacao_for_cliente(cliente_id: int, request: schemas.TransacaoRequ
             f"SELECT saldo, limite FROM clientes WHERE id = {cliente_id} FOR UPDATE"
         ).fetchone()
         
-        if result is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-        
-        if request.tipo not in ("c", "d"):
-            raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY) 
+        # if result is None:
+        #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         
         if request.tipo == "c":
             saldo_futuro = result[0] + request.valor
@@ -81,8 +78,8 @@ def read_cliente(cliente_id: int):
             f"SELECT saldo, limite FROM clientes WHERE id = {cliente_id}"
         ).fetchone()
         
-        if saldo is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
+        # if saldo is None:
+        #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
         
         transacoes_db = conn.execute(
             f"SELECT valor, tipo, descricao, realizada_em FROM transacoes WHERE cliente_id = {cliente_id} ORDER BY realizada_em DESC LIMIT 10"
