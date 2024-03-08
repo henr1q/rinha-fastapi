@@ -9,7 +9,7 @@
 </div>
 
 ## Repositório
-#[REPOSITÓRIO](https://github.com/henr1q/rinha-fastapi)
+[Repositório](https://github.com/henr1q/rinha-fastapi)
 
 ## Stack
 - `Nginx` Load Balancer
