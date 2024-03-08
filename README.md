@@ -15,3 +15,11 @@
 - `Nginx` Load Balancer
 - `PostgreSQL` Banco de dados
 - `FastAPI` Web Framework
+
+## Instruções
+
+Executar o comando abaixo no terminal:
+
+```sh
+$ docker-compose up
+```
