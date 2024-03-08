@@ -21,5 +21,5 @@
 Executar o comando abaixo no terminal:
 
 ```sh
-$ docker compose up
+docker compose up
 ```
