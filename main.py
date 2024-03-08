@@ -1,8 +1,6 @@
 import datetime as dt
 import os
-from fastapi import Depends, FastAPI, HTTPException, status
-from sqlalchemy.orm import Session
-from typing import List
+from fastapi import FastAPI, HTTPException, status
 from psycopg_pool import ConnectionPool
 import schemas
 import uvicorn
@@ -49,9 +47,6 @@ def create_transacao_for_cliente(cliente_id: int, request: schemas.TransacaoRequ
             f"SELECT saldo, limite FROM clientes WHERE id = {cliente_id} FOR UPDATE"
         ).fetchone()
         
-        # if result is None:
-        #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-        
         if request.tipo == "c":
             saldo_futuro = result[0] + request.valor
         else:
@@ -77,10 +72,7 @@ def read_cliente(cliente_id: int):
         saldo = conn.execute(
             f"SELECT saldo, limite FROM clientes WHERE id = {cliente_id}"
         ).fetchone()
-        
-        # if saldo is None:
-        #     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND)
-        
+
         transacoes_db = conn.execute(
             f"SELECT valor, tipo, descricao, realizada_em FROM transacoes WHERE cliente_id = {cliente_id} ORDER BY realizada_em DESC LIMIT 10"
         ).fetchall()

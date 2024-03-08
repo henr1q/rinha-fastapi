@@ -2,8 +2,8 @@ version: "3.5"
 
 services:
   api01: &api
-    #image: henriq/rinha:latest
-    build: .
+    image: henr1q/rinha:latest
+    #build: .
     hostname: api01
     restart: always
     environment:
